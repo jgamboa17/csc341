@@ -20,6 +20,9 @@ int main(int argc, char *argv[]){
 	int *pointer1;
 	pointer1 = &z;
 	
+	printf("The memory address of argc is: %p \n", &argc);
+ 	
+
 	printf("The value of variable z is %d \n", z);
 	printf("The address of variable z is %p \n", &z);
 	printf("The value of pointer1 = %p which is the same as the address of z which is %p \n", pointer1, &z);

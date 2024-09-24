@@ -1,3 +1,10 @@
+/*
+ * Jonathan Gamboa
+ * CSC 341
+ * 09/24/2024
+ * jgamboa6.c
+ *
+ */
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>

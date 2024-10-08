@@ -21,11 +21,19 @@ int main(void)
 
 	int *new_point;
 	int *new_point2;
-	int *new_expected = &expected;
-	int *valueReturn = &newValue;
+	int *point_expected;
+	int *point_return;
 
-	new_point = &new_expected;
-	new_point2 = &valueReturn;
+	int swap1 = 25;
+	int swap2 = 2;
+	int new_expected = 13;
+	int valueReturn = 7;
+
+	new_point = &swap1;
+	new_point2 = &swap2;
+	point_expected = &new_expected;
+	point_return = &valueReturn;
+
 
 	//A pointer only points to the address space of another value.
 	pointa = &expected;
@@ -50,12 +58,13 @@ int main(void)
 	//it also returns a value to we need to save that value after the function completes
 	
 	int valueReturned = compare_and_swap(pointa,expected,newValue);
-	new_compare_and_swap(*new_point, *new_point2, *new_expected, *valueReturn);
+	printf("new point1: %d, new point2: %d \n", swap1, swap2);
+	new_compare_and_swap(&new_point, &new_point2, &point_expected, &point_return);
 
 	//after the function completes it should have swapped expected with new value
 	printf("expected = %d, old value which was returned is %d \n",expected,valueReturned);
 
-//	printf("New pointer = %p, old pointer was return is %d \n," ,new_point, new_point2);
+	printf("New pointer = %d, old pointer was return is %d \n," ,swap1, swap2);
 
 	return EXIT_SUCCESS;
 }
@@ -76,15 +85,16 @@ int compare_and_swap(int *pointb, int expected, int new_value)
 }
 
 void new_compare_and_swap(int *point1, int *point2 ,int *expected, int *result){
-	int *temp;
+	int temp;
+	int temp2;
 
-	temp = &point1;
-	point1 = &point2;
-	point2 = &temp;
+	temp = *point1;
+	*point1 = *point2;
+	*point2 = temp;
 
-	temp = &expected;
-	expected = &result;
-	result = &temp;
+	temp2 = *expected;
+	*expected = *result;
+	*result = temp2;
 	
 }
 	

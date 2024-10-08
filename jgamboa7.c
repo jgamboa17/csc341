@@ -1,12 +1,12 @@
-//Garrett Poppe
-//Sync example
-
+/*
+ * Sync example
+*/
 #include <stdio.h>
 #include <stdlib.h>
 
 //this is a function prototype that lets the main know a function is available at the end of the program.
 int compare_and_swap(int *pointb, int expected, int new_value);
-
+void new_compare_and_swap(int *point1, int *point2, int *expected, int *new_value);
 
 int main(void)
 {
@@ -18,6 +18,14 @@ int main(void)
 	int *pointa;
 	int expected = 1;
 	int newValue = 22;
+
+	int *new_point;
+	int *new_point2;
+	int *new_expected = &expected;
+	int *valueReturn = &newValue;
+
+	new_point = &new_expected;
+	new_point2 = &valueReturn;
 
 	//A pointer only points to the address space of another value.
 	pointa = &expected;
@@ -42,10 +50,12 @@ int main(void)
 	//it also returns a value to we need to save that value after the function completes
 	
 	int valueReturned = compare_and_swap(pointa,expected,newValue);
+	new_compare_and_swap(*new_point, *new_point2, *new_expected, *valueReturn);
 
 	//after the function completes it should have swapped expected with new value
 	printf("expected = %d, old value which was returned is %d \n",expected,valueReturned);
 
+//	printf("New pointer = %p, old pointer was return is %d \n," ,new_point, new_point2);
 
 	return EXIT_SUCCESS;
 }
@@ -65,5 +75,16 @@ int compare_and_swap(int *pointb, int expected, int new_value)
 	return temp;
 }
 
+void new_compare_and_swap(int *point1, int *point2 ,int *expected, int *result){
+	int *temp;
 
+	temp = &point1;
+	point1 = &point2;
+	point2 = &temp;
+
+	temp = &expected;
+	expected = &result;
+	result = &temp;
+	
+}
 	

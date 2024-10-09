@@ -58,13 +58,13 @@ int main(void)
 	//it also returns a value to we need to save that value after the function completes
 	
 	int valueReturned = compare_and_swap(pointa,expected,newValue);
-	printf("new point1: %d, new point2: %d \n", swap1, swap2);
-	new_compare_and_swap(&new_point, &new_point2, &point_expected, &point_return);
 
 	//after the function completes it should have swapped expected with new value
 	printf("expected = %d, old value which was returned is %d \n",expected,valueReturned);
 
-	printf("New pointer = %d, old pointer was return is %d \n," ,swap1, swap2);
+	printf("Original pointer = %d, Second pointer is %d \n", *new_point, *new_point2);
+	new_compare_and_swap(new_point, new_point2, point_expected, point_return);
+	printf("New pointer = %d, old pointer is %d \n," , *new_point, *new_point2);
 
 	return EXIT_SUCCESS;
 }

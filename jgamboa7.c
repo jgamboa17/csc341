@@ -1,6 +1,8 @@
-/*
- * Sync example
+/* Jonathan Gamboa
+ * CSC 341
+ * 10/08/24
 */
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -31,8 +33,7 @@ int main(void)
 
 	new_point = &swap1;
 	new_point2 = &swap2;
-	point_expected = &new_expected;
-	point_return = &valueReturn;
+	point_expected = &expected; 
 
 
 	//A pointer only points to the address space of another value.
@@ -58,13 +59,17 @@ int main(void)
 	//it also returns a value to we need to save that value after the function completes
 	
 	int valueReturned = compare_and_swap(pointa,expected,newValue);
+	point_return = &valueReturned;
 
 	//after the function completes it should have swapped expected with new value
 	printf("expected = %d, old value which was returned is %d \n",expected,valueReturned);
 
-	printf("Original pointer = %d, Second pointer is %d \n", *new_point, *new_point2);
+	printf("\n");
+	printf("First pointer = %d, Second pointer is %d \n", *new_point, *new_point2);
+
 	new_compare_and_swap(new_point, new_point2, point_expected, point_return);
-	printf("New pointer = %d, old pointer is %d \n," , *new_point, *new_point2);
+	printf("First pointer = %d, second pointer is %d \n" , *new_point, *new_point2);
+	printf("New expected = %d, old value which was returned is %d \n", *point_expected, *point_return);
 
 	return EXIT_SUCCESS;
 }
